@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_start_service"
+        android:title="@string/menu_start_service"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_stop_service"
+        android:title="@string/menu_stop_service"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_add_point"
+        android:title="@string/menu_add_point"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+
+	<item
+	    android:id="@+id/menu_tools"
+        android:title="@string/menu_tools"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+	<item
+		android:id="@+id/menu_about"
+        android:title="@string/menu_about"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+	
+</menu>

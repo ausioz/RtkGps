@@ -8,7 +8,7 @@ RTKLIB rtknavi port on android.
 
 #### [rtklib][rtklib] features:
 
-* Version pre 2.4.2p9
+* Version pre 2.4.3b34a
 * GPS, GLONASS, Galileo, QZSS, BeiDou and SBAS Navigation systems
 * Single, DGPS/DGNSS, Kinematic, Static, Moving-Baseline, Fixed,
   PPP-Kinematic, PPP-Static and PPP-Fixed positioning modes.
@@ -29,6 +29,7 @@ RTKLIB rtknavi port on android.
 
 * Test mode for obtaining positions from internal GPS (without any RTKLIB function)
 * Bluetooth communication
+* Support for internal Trimble / Spectra Precision MobileMapper 50 internal receiver (U-Blox M8N) 
 * USB OTG communication with speed/parity/stop configuration (ACM, PL2303 chips and alpha for FTDI chips)
 * SiRF IV protocol (experimental)
 * Show altitude in status view if Height/Geodetic is choosen
@@ -41,10 +42,10 @@ RTKLIB rtknavi port on android.
 
 #### Proj4
 * Due to multiple issues (error in projection and lacks of features) Proj4J was removed and C lib proj4 was added
-* All conversion are done with proj4 4.8.0
+* All conversion are done with proj4 5.1.0
 * French projections are done with IGN certified method, Lambert II extended is computed with IGN certified grid ntf_r93.gsb
 * One custom proj4 specification string can be specified (take care of exact syntax).  
-* all standard proj4 formats and grids are included, all grids from http://download.osgeo.org/proj/proj-datumgrid-1.5.zip are also included. In other words you have access to this external files: alaska, chenyx06etrs.gsb, conus, epsg,esri, esri.extra, FL, GL27, hawaii, IGNF, MD, nad27, nad83, ntf_r93.gsb, ntv1_can.dat, null, nzgd2kgrid0005.gsb, other.extra, proj_def.dat, prvi, stgeorge, strlnc, stpaul, TN, WI, WO, world
+* all standard proj4 formats and grids are included, all grids from http://download.osgeo.org/proj/proj-datumgrid-1.7.zip are also included. In other words you have access to this external files: alaska, chenyx06etrs.gsb, conus, epsg,esri, esri.extra, FL, GL27, hawaii, IGNF, MD, nad27, nad83, ntf_r93.gsb, ntv1_can.dat, null, nzgd2kgrid0005.gsb, other.extra, proj_def.dat, prvi, stgeorge, strlnc, stpaul, TN, WI, WO, world, BETA2007.gsb, egm96_15.gtx
 * If you need another specific "free" or freely distributable grid or definition file, do not hesitate to drop me an email.
 
 #### Geoids
@@ -88,6 +89,32 @@ If you need precise ephemeris you have 2 ways for using them:
 * Manualy: In the correction tab you select "File" and type SP3 , in the filename you put the filename of the file you provide in RtkGps directory (ending with .SP3)  
 * Automatically: When the server is running, hit the "Tools" menu, here you have an option to download and inject automatically the latest ultra-rapid ephemeris from IGS or simply inject them if you already have the good file.  
   
+#### NTRIP Caster  
+This is highly experimental, but I embedded NTRIP Caster 0.1.5. It works but I'm not satisfied of the implementation. Because it cannot shutdown cleanly.  
+Why?  
+* 1- because closing connections does not work at 100% (even in original soft), so thread do not end at 100%  
+* 2- because by conception of the original Caster the end is not clean, it waits for Control-C for ending and ends with exit(1)!!!    
+* 3- because Android lacks some pthread functions (ie: real pthread_cancel...)  
+
+So I locked the ability to stop the NTRIP Caster without closing RTKGPS+.  
+But if you want to test it works, on the first launch 2 files are created in RtkGps/ntripcaster/  ,you can edit them, But as is it works and can provide 3 streams:  
+```
+/GNSS0
+/GNSS1
+/GNSS2
+(all three sources have rtkgps as password)
+```
+for using with the log streams you need to set them:  
+```
+server: 127.0.0.1
+mountpoint: GNSSx
+password: rtkgps (please change it)  
+```
+On your wifi network you can use your stream on:
+```
+ntrip://username:password@ip_shown_in_caster_options:2101/GNSSx
+(please change the login and the password) 
+```
 #### Building on Windows
 Android is Unix so it is easier to build under an Unix system. Personnaly I use MacOSX but it can be done under Windows (tested under 8.1 x86_64).  
 You need a correctly installed ndk (under windows I use ndk-r9d), a correctly Installed ADT (I use x86_64-20140702).  
@@ -105,14 +132,11 @@ For that please modify RtkGps/jni/rtklib.mk and Android.mk for removing LAPACK f
 now under a cygwin terminal move to your RtkGps directory and build with ```ndk-build``` command.  
 Under Eclipse be sure that you do not set to build the native library since it fails.  
   
-#### NTRIP Caster  
-I made an highly experimental version with an embedded ntripcaster 0.1.5 server, if you are intersting you can find it in the [ntripcaster branch](https://github.com/eltorio/RtkGps/tree/ntripcaster).  Do not hesitate to discuss about it.  
-  
 #### Translations
-Contributors are welcomed for translating RTKGPS+, the translation can be easily managed on [Crowdin](https://crowdin.com/project/gpsplusrtkgps/invite).   
+Contributors are welcomed for translating RTKGPS+, the translation can be easily managed on [Crowdin](https://crowdin.com/project/gpsplusrtkgps).   
 You can freely create a translator account and with it you will be able request for a new translation.  
 Today target languages are English, French, Spanish, Polish, German and Russian  
-Current translation to this target languages [![Crowdin](https://d322cqt584bo4o.cloudfront.net/gpsplusrtkgps/localized.png)](https://crowdin.com/project/gpsplusrtkgps/invite)  
+Current translation to this target languages [![Crowdin](https://d322cqt584bo4o.cloudfront.net/gpsplusrtkgps/localized.png)](https://crowdin.com/project/gpsplusrtkgps)  
 [If you want this in your native language or if you want to contribute to one of the current translation, you are welcome.](https://crowdin.com/project/gpsplusrtkgps/invite)  
 I already made this translations:
 * English (source language)
@@ -144,4 +168,9 @@ I already made this translations:
 
 ###### Binary distribution
 
-* the latest apk wich is maybe very instable can be found in bin directory, but prefer the Google Play version
+* the latest apk with Mobile Mapper 50 and proj4 5.1.0 wich is maybe very instable can be found in bin directory, but prefer the Google Play version
+
+###### Beta distribution
+
+* the build 18 / 08 / 2018 (1.0alpha26) has been deployed as "BETA" on Google Play Store it is an open beta… If you want try it, but don't blame if it does not work.
+Ronan

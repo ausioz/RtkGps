@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_drawer"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:layout_marginTop="90dp"
+    android:background="#ff333333"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp">
+
+        <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/navdraw_category_server" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/navdraw_item_server_switch"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/navdraw_server_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/navdraw_item_status"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_status" />
+
+        <TextView
+            android:id="@+id/navdraw_item_map"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_map" />
+
+        <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_marginTop="10dp"
+            android:text="@string/navdraw_category_streams" />
+
+        <TextView
+            android:id="@+id/navdraw_item_input_streams"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_input_streams" />
+
+        <TextView
+            android:id="@+id/navdraw_item_output_streams"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_output_streams" />
+
+        <TextView
+            android:id="@+id/navdraw_item_log_streams"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_log_streams" />
+
+        <!--<TextView
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/navdraw_ntripcaster_server_switch" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/navdraw_ntripcaster_server_switch"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/navdraw_ntripcaster_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/NavigationDrawerItem"
+            android:id="@+id/navdraw_item_ntripcaster_options"
+            android:text="@string/navdraw_item_ntripcaster_options" />-->
+
+        <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_marginTop="10dp"
+            android:text="@string/navdraw_category_settings" />
+
+        <TextView
+            android:id="@+id/navdraw_item_processing_options"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_processing_options" />
+
+        <TextView
+            android:id="@+id/navdraw_item_solution_options"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_solution_options" />
+
+        <TextView
+            android:id="@+id/navdraw_item_save_settings"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_save_settings" />
+
+        <TextView
+            android:id="@+id/navdraw_item_load_settings"
+            style="@style/NavigationDrawerItem"
+            android:text="@string/navdraw_item_load_settings" />
+
+    </LinearLayout>
+</ScrollView>

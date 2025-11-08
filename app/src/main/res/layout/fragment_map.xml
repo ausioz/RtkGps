@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:rtkgps="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/map_container"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<org.osmdroid.views.MapView
+		android:id="@+id/mapView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" />
+
+	<gpsplus.rtkgps.view.StreamIndicatorsView
+		android:id="@+id/streamIndicatorsView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="top|end"
+		android:layout_marginBottom="5dp"
+		android:background="#aa333333"
+		android:padding="4dp" />
+
+    <ImageView
+        android:id="@+id/iv_my_location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="18dp"
+        android:background="#aa333333"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="5dp"
+        android:src="@drawable/ic_my_location" />
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|left"
+		android:orientation="vertical"
+		android:background="#aa333333"
+		android:paddingLeft="5dp"
+		android:paddingRight="5dp"
+		android:paddingTop="5dp">
+
+		<gpsplus.rtkgps.view.GTimeView
+			android:id="@+id/gtimeView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="4dp"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:textColor="@android:color/white"
+			rtkgps:time_format="local" />
+
+		<gpsplus.rtkgps.view.SolutionView
+			android:id="@+id/solutionView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			rtkgps:textColor="@android:color/white" />
+	</LinearLayout>
+
+</FrameLayout>
